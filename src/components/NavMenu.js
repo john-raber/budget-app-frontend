@@ -3,7 +3,7 @@ import { Navbar, NavbarBrand } from "reactstrap";
 
 const NavMenu = () => {
   return (
-    <Navbar color="dark">
+    <Navbar>
       <NavbarBrand href="/">Budgetr</NavbarBrand>
     </Navbar>
   );
