@@ -20,7 +20,7 @@ class BudgetForm extends Component {
             name="name"
             id="name"
             value={this.state.name}
-            onChange={this.handleFormChange}
+            onChange={e => this.handleFormChange(e.target.name, e.target.value)}
           />
         </FormGroup>
         <Button color="primary">Create</Button>
