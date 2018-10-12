@@ -11,12 +11,9 @@ import {
 
 import NavMenu from "../components/NavMenu";
 
-const HomeContainer = () => {
+const ProfileContainer = () => {
   return (
     <Container fluid>
-      <Row>
-        <NavMenu />
-      </Row>
       <Row>
         <Col md={{ size: "auto", offset: 4 }}>
           <CardDeck>
@@ -39,4 +36,4 @@ const HomeContainer = () => {
   );
 };
 
-export default HomeContainer;
+export default ProfileContainer;
