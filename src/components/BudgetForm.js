@@ -1,10 +1,26 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+
+import { createBudget } from "../actions/budgets";
 
 class BudgetForm extends Component {
   state = {
     name: ""
+  };
+
+  handleFormSubmit = e => {
+    const budget = {
+      budget: {
+        ...this.state, // if you add more to this form's state this will have to become ``` name: this.state.name ```
+        user_id: this.props.currentUser.id
+      }
+    };
+
+    e.preventDefault();
+    this.props.createBudget(budget);
+    this.setState({ name: "" });
   };
 
   handleFormChange = (name, value) => {
@@ -13,7 +29,7 @@ class BudgetForm extends Component {
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleFormSubmit}>
         <FormGroup>
           <Label for="name">Name</Label>
           <Input
@@ -29,4 +45,15 @@ class BudgetForm extends Component {
   }
 }
 
-export default withRouter(BudgetForm);
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { createBudget }
+  )(BudgetForm)
+);
