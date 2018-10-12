@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Collapse,
@@ -11,7 +11,7 @@ import {
   NavLink
 } from "reactstrap";
 
-import { logoutUser } from "../actions";
+import { logoutUser } from "../actions/users";
 
 class NavMenu extends Component {
   state = {
@@ -54,7 +54,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(NavMenu);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { logoutUser }
+  )(NavMenu)
+);

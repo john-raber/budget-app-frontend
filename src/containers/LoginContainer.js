@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { Container, Row, Col, Jumbotron } from "reactstrap";
 
 import NavMenu from "../components/NavMenu";
@@ -26,4 +27,4 @@ const LoginContainer = props => {
   );
 };
 
-export default LoginContainer;
+export default withRouter(LoginContainer);

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-import { loginUser } from "../actions";
+import { loginUser } from "../actions/users";
 
 class LoginForm extends Component {
   state = {
@@ -24,8 +24,6 @@ class LoginForm extends Component {
   };
 
   render() {
-    console.log(this.props);
-
     return (
       <Fragment>
         <Form onSubmit={this.handleFormSubmit}>
@@ -59,7 +57,9 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(
-  null,
-  { loginUser }
-)(withRouter(LoginForm));
+export default withRouter(
+  connect(
+    null,
+    { loginUser }
+  )(LoginForm)
+);

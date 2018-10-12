@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 
 import NavMenu from "../components/NavMenu";
 import LoginContainer from "./LoginContainer";
 import ProfileContainer from "./ProfileContainer";
-import { setUserFromToken } from "../actions";
+import BudgetFormContainer from "./BudgetFormContainer";
+import { setUserFromToken } from "../actions/users";
 
 class App extends Component {
   componentDidMount() {
@@ -13,12 +14,12 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="App">
         <NavMenu />
         <Switch>
-          <Route exact path="/profile" component={ProfileContainer} />
+          <Route path="/profile/add-budget" component={BudgetFormContainer} />
+          <Route path="/profile" component={ProfileContainer} />
           <Route path="/login" component={LoginContainer} />
         </Switch>
       </div>
@@ -32,7 +33,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { setUserFromToken }
-)(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { setUserFromToken }
+  )(App)
+);

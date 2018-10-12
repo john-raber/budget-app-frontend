@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink, withRouter } from "react-router-dom";
 import {
   Container,
   Row,
@@ -25,9 +26,11 @@ const ProfileContainer = () => {
             </Card>
             <Card body className="text-center">
               <CardTitle>Add Budget</CardTitle>
-              <Button outline color="success">
-                Get Started
-              </Button>
+              <NavLink to="/profile/add-budget">
+                <Button outline color="success">
+                  Get Started
+                </Button>
+              </NavLink>
             </Card>
           </CardDeck>
         </Col>
@@ -36,4 +39,4 @@ const ProfileContainer = () => {
   );
 };
 
-export default ProfileContainer;
+export default withRouter(ProfileContainer);

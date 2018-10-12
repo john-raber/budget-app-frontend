@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-import { createUser } from "../actions";
+import { createUser } from "../actions/users";
 
 class NewUserForm extends Component {
   state = {
@@ -74,7 +74,9 @@ class NewUserForm extends Component {
   }
 }
 
-export default connect(
-  null,
-  { createUser }
-)(withRouter(NewUserForm));
+export default withRouter(
+  connect(
+    null,
+    { createUser }
+  )(NewUserForm)
+);
