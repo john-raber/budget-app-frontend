@@ -24,6 +24,8 @@ class LoginForm extends Component {
   };
 
   render() {
+    console.log(this.props);
+
     return (
       <Fragment>
         <Form onSubmit={this.handleFormSubmit}>

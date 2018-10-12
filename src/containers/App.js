@@ -13,19 +13,26 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="App">
         <NavMenu />
         <Switch>
+          <Route exact path="/profile" component={ProfileContainer} />
           <Route path="/login" component={LoginContainer} />
-          <Route path="/profile" component={ProfileContainer} />
         </Switch>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { setUserFromToken }
 )(App);

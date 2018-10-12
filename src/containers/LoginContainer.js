@@ -5,7 +5,7 @@ import NavMenu from "../components/NavMenu";
 import LoginForm from "../components/LoginForm";
 import NewUserForm from "../components/NewUserForm";
 
-const LoginContainer = () => {
+const LoginContainer = props => {
   return (
     <Container fluid>
       <Row>
