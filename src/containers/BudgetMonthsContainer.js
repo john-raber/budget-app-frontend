@@ -4,6 +4,8 @@ import { Jumbotron, Table } from "reactstrap";
 const BudgetMonthsContainer = () => {
   return (
     <Jumbotron>
+      {/* all of the elements inside the Jumbotron should be moved into a
+        separate component */}
       <h4 className="display-4">October 2018</h4>
       <p className="lead">$403 left to allocate</p>
       <hr className="my-2" />
