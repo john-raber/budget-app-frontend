@@ -19,7 +19,7 @@ class App extends Component {
       <div className="App">
         <NavMenu />
         <Switch>
-          <Route path="/profile/budgets" component={BudgetContainer} />
+          <Route path="/profile/:budgetId" component={BudgetContainer} />
           <Route path="/profile/add-budget" component={BudgetFormContainer} />
           <Route path="/profile" component={ProfileContainer} />
           <Route path="/login" component={LoginContainer} />
