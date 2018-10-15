@@ -19,6 +19,8 @@ class BudgetContainer extends Component {
   render() {
     const { accounts } = this.props;
 
+    console.log("accounts in BudgetContainer");
+
     return (
       <Container>
         <Row>
