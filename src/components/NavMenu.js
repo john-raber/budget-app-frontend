@@ -25,7 +25,6 @@ class NavMenu extends Component {
   }
 
   render() {
-    const { currentUser } = this.props;
     return (
       <Navbar>
         <NavbarBrand href="/">Budgetr</NavbarBrand>
@@ -48,15 +47,9 @@ class NavMenu extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.currentUser
-  };
-};
-
 export default withRouter(
   connect(
-    mapStateToProps,
+    null,
     { logoutUser }
   )(NavMenu)
 );

@@ -11,7 +11,6 @@ import {
   Button
 } from "reactstrap";
 
-import NavMenu from "../components/NavMenu";
 import BudgetCard from "../components/BudgetCard";
 
 import { fetchBudgets } from "../actions/budgets";

@@ -1,27 +1,56 @@
-import React from "react";
-import { Container, Row, Col, ButtonGroup, Button } from "reactstrap";
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { Container, Row, Col } from "reactstrap";
 
 import BudgetMonthsContainer from "./BudgetMonthsContainer";
+import AccountForm from "../components/AccountForm";
+import AccountsSidebar from "../components/AccountsSidebar";
 
-const BudgetContainer = () => {
-  return (
-    <Container>
-      <Row>
-        <Col xs="2">
-          <ButtonGroup vertical>
-            <Button>Bank Account 1</Button>
-            <Button>Bank Account 2</Button>
-          </ButtonGroup>
-        </Col>
-        <Col xs="5">
-          <BudgetMonthsContainer />
-        </Col>
-        <Col xs="5">
-          <BudgetMonthsContainer />
-        </Col>
-      </Row>
-    </Container>
-  );
+import { fetchAccounts } from "../actions/accounts";
+
+class BudgetContainer extends Component {
+  componentDidMount() {
+    const { budgetId } = this.props.match.params;
+
+    this.props.fetchAccounts(budgetId);
+  }
+
+  render() {
+    console.log(this.props);
+    return (
+      <Container>
+        <Row>
+          <Col xs="2">
+            <Row>
+              <AccountsSidebar />
+            </Row>
+            <Row>
+              <h5>Add Account</h5>
+              <AccountForm />
+            </Row>
+          </Col>
+          <Col xs="5">
+            <BudgetMonthsContainer />
+          </Col>
+          <Col xs="5">
+            <BudgetMonthsContainer />
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    accounts: state.accounts
+  };
 };
 
-export default BudgetContainer;
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { fetchAccounts }
+  )(BudgetContainer)
+);

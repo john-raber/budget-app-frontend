@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { Container, Row, Col, Jumbotron } from "reactstrap";
 
-import NavMenu from "../components/NavMenu";
 import LoginForm from "../components/LoginForm";
 import NewUserForm from "../components/NewUserForm";
 

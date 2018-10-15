@@ -13,7 +13,7 @@ class LoginForm extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    let p = this.props
+    this.props
       .loginUser({ user: this.state })
       // loginUser returns a promise so after we have set our user we can then
       // push '/profile' to our history.  When profile container mounts, we will
