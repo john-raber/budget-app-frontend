@@ -17,13 +17,14 @@ class BudgetContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
+    const { accounts } = this.props;
+
     return (
       <Container>
         <Row>
           <Col xs="2">
             <Row>
-              <AccountsSidebar />
+              <AccountsSidebar accounts={accounts} />
             </Row>
             <Row>
               <h5>Add Account</h5>

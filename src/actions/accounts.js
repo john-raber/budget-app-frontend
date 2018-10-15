@@ -52,7 +52,10 @@ function createAccount({ account }) {
       }
     })
       .then(r => r.json())
-      .then(json => dispatch(addAccount(json.account)));
+      .then(acct => {
+        console.log(acct);
+        dispatch(addAccount(acct));
+      });
   };
 }
 
