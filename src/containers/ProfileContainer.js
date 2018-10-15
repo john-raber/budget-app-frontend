@@ -18,7 +18,9 @@ import { fetchBudgets } from "../actions/budgets";
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    this.props.fetchBudgets();
+    const { currentUser } = this.props;
+
+    this.props.fetchBudgets(currentUser.id);
   }
 
   render() {
@@ -51,7 +53,7 @@ class ProfileContainer extends Component {
 const mapStateToProps = state => {
   return {
     currentUser: state.currentUser,
-    budgets: state.budgets.filter(b => b.user_id === state.currentUser.id)
+    budgets: state.budgets
   };
 };
 

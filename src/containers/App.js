@@ -6,6 +6,7 @@ import NavMenu from "../components/NavMenu";
 import LoginContainer from "./LoginContainer";
 import ProfileContainer from "./ProfileContainer";
 import BudgetFormContainer from "./BudgetFormContainer";
+import BudgetContainer from "./BudgetContainer";
 import { setUserFromToken } from "../actions/users";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
       <div className="App">
         <NavMenu />
         <Switch>
+          <Route path="/profile/budgets" component={BudgetContainer} />
           <Route path="/profile/add-budget" component={BudgetFormContainer} />
           <Route path="/profile" component={ProfileContainer} />
           <Route path="/login" component={LoginContainer} />

@@ -13,8 +13,13 @@ class LoginForm extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    this.props.loginUser({ user: this.state });
-    this.props.history.push("/profile");
+    let p = this.props
+      .loginUser({ user: this.state })
+      // loginUser returns a promise so after we have set our user we can then
+      // push '/profile' to our history.  When profile container mounts, we will
+      // have the currentUser set and our budgets fetch will have a userId to
+      // use to find the right budgets in the redux store
+      .then(() => this.props.history.push("/profile"));
   };
 
   handleFormChange = (name, value) => {

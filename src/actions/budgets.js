@@ -10,13 +10,15 @@ function addBudget(budget) {
 }
 
 function fetchedUserBudgets(budgets) {
+  // console.log("fetchedUserBudgets call");
   return {
     type: FETCHED_USER_BUDGETS,
     budgets
   };
 }
 
-function fetchBudgets() {
+function fetchBudgets(userId) {
+  // console.log("fetchBudgets call");
   return dispatch => {
     const token = localStorage.getItem("token");
 
@@ -29,7 +31,8 @@ function fetchBudgets() {
     })
       .then(r => r.json())
       .then(budgets => {
-        dispatch(fetchedUserBudgets(budgets));
+        // console.log("budgets: ", budgets);
+        dispatch(fetchedUserBudgets(budgets.filter(b => b.user_id === userId)));
       });
   };
 }

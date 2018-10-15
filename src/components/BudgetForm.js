@@ -21,6 +21,7 @@ class BudgetForm extends Component {
     e.preventDefault();
     this.props.createBudget(budget);
     this.setState({ name: "" });
+    this.props.history.push("/profile");
   };
 
   handleFormChange = (name, value) => {
