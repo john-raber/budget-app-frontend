@@ -51,7 +51,10 @@ function createBudget({ budget }) {
       }
     })
       .then(r => r.json())
-      .then(json => dispatch(addBudget(json.budget)));
+      .then(json => {
+        console.log(json);
+        dispatch(addBudget(json.budget));
+      });
   };
 }
 
