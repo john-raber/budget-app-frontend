@@ -16,15 +16,15 @@ const CategoryTable = ({ categories, budgetCategories, categoriesToShow }) => {
           </tr>
         </thead>
         <tbody>
-          {categories.map(c => {
-            if (categoriesToShow.includes(c.id)) {
-              return (
-                <tr key={c.id}>
-                  <th scope="row">{c.name}</th>
-                  <th scope="row">$89</th>
-                </tr>
-              );
-            }
+          {budgetCategories.map(bc => {
+            let cat = categories.find(c => c.id === bc.category_id);
+
+            return (
+              <tr key={cat.id}>
+                <th scope="row">{cat.name}</th>
+                <th scope="row">{`$${bc.target}`}</th>
+              </tr>
+            );
           })}
         </tbody>
       </Table>
