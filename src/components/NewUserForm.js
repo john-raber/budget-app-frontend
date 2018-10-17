@@ -14,8 +14,9 @@ class NewUserForm extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    this.props.createUser({ user: this.state });
-    this.props.history.push("/profile");
+    this.props
+      .createUser({ user: this.state })
+      .then(() => this.props.history.push("/profile"));
   };
 
   handleFormChange = (name, value) => {

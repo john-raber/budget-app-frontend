@@ -61,7 +61,7 @@ function logoutUser() {
 
 function createUser({ user }) {
   return dispatch => {
-    fetch(USERS_URL, {
+    return fetch(USERS_URL, {
       method: "POST",
       body: JSON.stringify({ user }),
       headers: {
