@@ -8,18 +8,20 @@ import AccountForm from "../components/AccountForm";
 import AccountsSidebar from "../components/AccountsSidebar";
 
 import { fetchAccounts } from "../actions/accounts";
+import { fetchCategories } from "../actions/categories";
+import { fetchBudgetCategories } from "../actions/budgetCategories";
 
 class BudgetContainer extends Component {
   componentDidMount() {
     const { budgetId } = this.props.match.params;
 
     this.props.fetchAccounts(budgetId);
+    this.props.fetchCategories();
+    this.props.fetchBudgetCategories(budgetId);
   }
 
   render() {
     const { accounts } = this.props;
-
-    console.log("accounts in BudgetContainer");
 
     return (
       <Container>
@@ -54,6 +56,6 @@ const mapStateToProps = state => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { fetchAccounts }
+    { fetchAccounts, fetchCategories, fetchBudgetCategories }
   )(BudgetContainer)
 );

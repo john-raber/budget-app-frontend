@@ -10,12 +10,10 @@ function addAccount({ account }) {
 }
 
 function fetchedAccounts(accounts) {
-  console.log("fetchedAccounts call");
   return { type: FETCHED_ACCOUNTS, accounts };
 }
 
 function fetchAccounts(budgetId) {
-  console.log("fetchAccounts call");
   return dispatch => {
     const token = localStorage.getItem("token");
 
@@ -38,7 +36,6 @@ function fetchAccounts(budgetId) {
 }
 
 function createAccount({ account }) {
-  console.log("createAccount call");
   return dispatch => {
     const token = localStorage.getItem("token");
 
@@ -53,7 +50,6 @@ function createAccount({ account }) {
     })
       .then(r => r.json())
       .then(acct => {
-        console.log(acct);
         dispatch(addAccount(acct));
       });
   };
