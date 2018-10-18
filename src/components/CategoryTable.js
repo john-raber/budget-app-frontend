@@ -1,17 +1,27 @@
 import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { Table } from "reactstrap";
+import { FaEdit } from "react-icons/fa";
 
 import CategoryForm from "../components/CategoryForm";
+import TransactionForm from "../components/TransactionForm";
 
 const CategoryTable = ({ categories, budgetCategories, categoriesToShow }) => {
   return (
     <Fragment>
-      <Table hover borderless>
+      <Table hover>
         <thead>
           <tr>
-            <th>Category</th>
-            <th>Balance Remaining</th>
+            <th>
+              Category <CategoryForm />
+            </th>
+            <th>
+              Monthly Target <FaEdit color="darkRed" />
+            </th>
+            <th>
+              Transactions <TransactionForm />
+            </th>
+            <th>Ending Balance</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +41,6 @@ const CategoryTable = ({ categories, budgetCategories, categoriesToShow }) => {
           })}
         </tbody>
       </Table>
-      <CategoryForm />
     </Fragment>
   );
 };

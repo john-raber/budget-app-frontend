@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
 
-import BudgetMonthsContainer from "./BudgetMonthsContainer";
+import BudgetMonthContainer from "./BudgetMonthContainer";
 import AccountForm from "../components/AccountForm";
 import AccountsSidebar from "../components/AccountsSidebar";
 
@@ -26,7 +26,7 @@ class BudgetContainer extends Component {
     return (
       <Container>
         <Row>
-          <Col xs="2">
+          <Col xs="3">
             <Row>
               <AccountsSidebar accounts={accounts} />
             </Row>
@@ -35,11 +35,8 @@ class BudgetContainer extends Component {
               <AccountForm />
             </Row>
           </Col>
-          <Col xs="5">
-            <BudgetMonthsContainer />
-          </Col>
-          <Col xs="5">
-            <BudgetMonthsContainer />
+          <Col xs="9">
+            <BudgetMonthContainer />
           </Col>
         </Row>
       </Container>

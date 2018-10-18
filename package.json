@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "bootstrap": "~> 4.1.2",
+    "moment": "^2.22.2",
     "rc-slider": "^8.6.3",
     "rc-tooltip": "^3.7.3",
     "react": "^16.5.2",
+    "react-datepicker": "^1.7.0",
     "react-dom": "^16.5.2",
+    "react-icons": "^3.2.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",

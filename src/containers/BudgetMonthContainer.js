@@ -5,7 +5,7 @@ import { Jumbotron } from "reactstrap";
 
 import CategoryTable from "../components/CategoryTable";
 
-const BudgetMonthsContainer = ({
+const BudgetMonthContainer = ({
   categories,
   budgetCategories,
   categoriesToShow
@@ -32,4 +32,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(BudgetMonthsContainer));
+export default withRouter(connect(mapStateToProps)(BudgetMonthContainer));

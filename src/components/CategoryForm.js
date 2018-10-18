@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { FaPlusCircle } from "react-icons/fa";
 import {
   Modal,
   ModalHeader,
@@ -86,9 +87,7 @@ class CategoryForm extends Component {
   render() {
     return (
       <Fragment>
-        <Button color="success" onClick={this.toggle}>
-          Add Category
-        </Button>
+        <FaPlusCircle color="blue" onClick={this.toggle} />
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader>New Category</ModalHeader>
           <ModalBody>
