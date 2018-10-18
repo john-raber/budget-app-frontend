@@ -16,7 +16,11 @@ const CategoryTable = ({ categories, budgetCategories, categoriesToShow }) => {
         </thead>
         <tbody>
           {budgetCategories.map(bc => {
-            let cat = categories.find(c => c.id === bc.category_id);
+            let cat = categories.find(c => {
+              console.log(c);
+              console.log(bc);
+              return c.id === bc.category_id;
+            });
 
             return (
               <tr key={cat.id}>

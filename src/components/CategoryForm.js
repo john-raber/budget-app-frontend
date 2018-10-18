@@ -56,12 +56,16 @@ class CategoryForm extends Component {
     // because the category has not been associated with the budget yet,
     // therefore the category won't be included in our categoriesToShow prop.
     this.props.createCategory(category).then(cat => {
+      console.log("category after create: ", cat);
       const budget_category = {
         budget_category: {
-          budget_id: Number(this.props.match.params.budgetId),
-          category_id: cat.category.id
+          budget_id: Number(this.props.match.params.budgetId), // budgetId from the URL will be a string so I will convert it to a number for the fetch
+          category_id: cat.category.id,
+          target: Number(this.state.target) // the target in state could be a string if input with the input field instead of slider, so I will convert it just in case
         }
       };
+
+      console.log(budget_category);
 
       // Once we have the category created the budgetCategory can be created;
       this.props.createBudgetCategory(budget_category).then(bCategory => {
@@ -104,11 +108,16 @@ class CategoryForm extends Component {
                 <Label for="target" id="target">
                   Monthly Target
                 </Label>
+                {/* After updating target state with the input field the value
+                  in state will be a string so I will convert the target state
+                  to a number before passing it to the form slider.
+                */}
                 <FormSlider
-                  value={this.state.target}
+                  value={Number(this.state.target)}
                   handleSliderChange={this.handleSliderChange}
                 />
                 <Input
+                  type="number"
                   name="target"
                   id="target"
                   value={this.state.target}

@@ -35,10 +35,11 @@ function fetchCategories() {
 }
 
 function fetchCategory(id) {
+  console.log("fetchCategory called");
   return dispatch => {
     const token = localStorage.getItem("token");
 
-    fetch(`${CATEGORIES_URL}/${id}`, {
+    return fetch(`${CATEGORIES_URL}/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
