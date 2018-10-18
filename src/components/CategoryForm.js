@@ -12,10 +12,10 @@ import {
   Button
 } from "reactstrap";
 
+import FormSlider from "./FormSlider";
 import {
   createCategory,
   addCategory,
-  fetchCategories,
   fetchCategory
 } from "../actions/categories";
 
@@ -27,7 +27,8 @@ import {
 class CategoryForm extends Component {
   state = {
     modal: false,
-    name: ""
+    name: "",
+    target: 500
   };
 
   toggle = () => {
@@ -36,6 +37,10 @@ class CategoryForm extends Component {
 
   handleFormChange = (name, value) => {
     this.setState({ [name]: value });
+  };
+
+  handleSliderChange = pos => {
+    this.setState({ target: pos });
   };
 
   handleFormSubmit = e => {
@@ -90,6 +95,23 @@ class CategoryForm extends Component {
                   name="name"
                   id="name"
                   value={this.state.name}
+                  onChange={e =>
+                    this.handleFormChange(e.target.name, e.target.value)
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="target" id="target">
+                  Monthly Target
+                </Label>
+                <FormSlider
+                  value={this.state.target}
+                  handleSliderChange={this.handleSliderChange}
+                />
+                <Input
+                  name="target"
+                  id="target"
+                  value={this.state.target}
                   onChange={e =>
                     this.handleFormChange(e.target.name, e.target.value)
                   }
