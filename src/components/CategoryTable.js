@@ -15,27 +15,27 @@ const CategoryTable = ({ categories, budgetCategories, categoriesToShow }) => {
             <th>
               Category <CategoryForm />
             </th>
-            <th>
-              Monthly Target <FaEdit color="darkRed" />
-            </th>
-            <th>
-              Transactions <TransactionForm />
-            </th>
+            <th>Monthly Target</th>
+            <th>Transactions</th>
             <th>Ending Balance</th>
           </tr>
         </thead>
         <tbody>
           {budgetCategories.map(bc => {
             let cat = categories.find(c => {
-              console.log(c);
-              console.log(bc);
               return c.id === bc.category_id;
             });
 
             return (
               <tr key={cat.id}>
                 <th scope="row">{cat.name}</th>
-                <th scope="row">{`$${bc.target}`}</th>
+                <th scope="row">
+                  {`$${bc.target}`} <FaEdit color="darkRed" />
+                </th>
+                <th scope="row">
+                  {2} <TransactionForm category={cat} />
+                </th>
+                <th scope="row">{bc.target - 2}</th>
               </tr>
             );
           })}
