@@ -29,7 +29,7 @@ class CategoryForm extends Component {
   state = {
     modal: false,
     name: "",
-    target: 500
+    balance: 500
   };
 
   toggle = () => {
@@ -62,7 +62,7 @@ class CategoryForm extends Component {
         budget_category: {
           budget_id: Number(this.props.match.params.budgetId), // budgetId from the URL will be a string so I will convert it to a number for the fetch
           category_id: cat.category.id,
-          target: Number(this.state.target) // the target in state could be a string if input with the input field instead of slider, so I will convert it just in case
+          balance: Number(this.state.balance) // the target in state could be a string if input with the input field instead of slider, so I will convert it just in case
         }
       };
 
