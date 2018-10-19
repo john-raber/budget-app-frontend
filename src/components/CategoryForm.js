@@ -41,7 +41,7 @@ class CategoryForm extends Component {
   };
 
   handleSliderChange = pos => {
-    this.setState({ target: pos });
+    this.setState({ balance: pos });
   };
 
   handleFormSubmit = e => {
@@ -65,8 +65,6 @@ class CategoryForm extends Component {
           balance: Number(this.state.balance) // the target in state could be a string if input with the input field instead of slider, so I will convert it just in case
         }
       };
-
-      console.log(budget_category);
 
       // Once we have the category created the budgetCategory can be created;
       this.props.createBudgetCategory(budget_category).then(bCategory => {
@@ -105,21 +103,21 @@ class CategoryForm extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="target" id="target">
-                  Monthly Target
+                  Starting Balance
                 </Label>
                 {/* After updating target state with the input field the value
                   in state will be a string so I will convert the target state
                   to a number before passing it to the form slider.
                 */}
                 <FormSlider
-                  value={Number(this.state.target)}
+                  value={Number(this.state.balance)}
                   handleSliderChange={this.handleSliderChange}
                 />
                 <Input
                   type="number"
-                  name="target"
-                  id="target"
-                  value={this.state.target}
+                  name="balance"
+                  id="balance"
+                  value={this.state.balance}
                   onChange={e =>
                     this.handleFormChange(e.target.name, e.target.value)
                   }

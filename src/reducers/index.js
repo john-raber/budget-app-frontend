@@ -5,13 +5,15 @@ import budgetsReducer from "./budgetsReducer";
 import accountsReducer from "./accountsReducer";
 import categoriesReducer from "./categoriesReducer";
 import budgetCategoriesReducer from "./budgetCategoriesReducer";
+import transactionsReducer from "./transactionsReducer";
 
 const rootReducer = combineReducers({
   currentUser: currentUserReducer,
   budgets: budgetsReducer,
   accounts: accountsReducer,
   categories: categoriesReducer,
-  budgetCategories: budgetCategoriesReducer
+  budgetCategories: budgetCategoriesReducer,
+  transactions: transactionsReducer
 });
 
 export default rootReducer;

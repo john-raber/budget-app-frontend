@@ -15,7 +15,7 @@ const CategoryTable = ({ categories, budgetCategories, categoriesToShow }) => {
             <th>
               Category <CategoryForm />
             </th>
-            <th>Monthly Target</th>
+            <th>Starting Balance</th>
             <th>Transactions</th>
             <th>Ending Balance</th>
           </tr>
@@ -30,12 +30,13 @@ const CategoryTable = ({ categories, budgetCategories, categoriesToShow }) => {
               <tr key={cat.id}>
                 <th scope="row">{cat.name}</th>
                 <th scope="row">
-                  {`$${bc.target}`} <FaEdit color="darkRed" />
+                  {`$${Number(bc.balance).toFixed(2)}`}{" "}
+                  <FaEdit color="darkRed" />
                 </th>
                 <th scope="row">
-                  {2} <TransactionForm category={cat} />
+                  {(2.45).toFixed(2)} <TransactionForm category={cat} />
                 </th>
-                <th scope="row">{bc.target - 2}</th>
+                <th scope="row">{(bc.balance - 2.45).toFixed(2)}</th>
               </tr>
             );
           })}
