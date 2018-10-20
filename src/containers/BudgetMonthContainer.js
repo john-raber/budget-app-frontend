@@ -7,7 +7,8 @@ import CategoryTable from "../components/CategoryTable";
 
 const BudgetMonthContainer = ({
   categories,
-  budgetCategories,
+  transactions,
+  currentBudget,
   categoriesToShow
 }) => {
   return (
@@ -16,9 +17,9 @@ const BudgetMonthContainer = ({
       <p className="lead">$403 left to allocate</p>
       <hr className="my-2" />
       <CategoryTable
-        categories={categories}
-        budgetCategories={budgetCategories}
-        categoriesToShow={categoriesToShow}
+        currentBudget={currentBudget}
+        categories={categories.filter(c => c.budget.id === currentBudget.id)}
+        transactions={transactions}
       />
     </Jumbotron>
   );
@@ -27,8 +28,7 @@ const BudgetMonthContainer = ({
 const mapStateToProps = state => {
   return {
     categories: state.categories,
-    budgetCategories: state.budgetCategories,
-    categoriesToShow: state.budgetCategories.map(bc => bc.category_id)
+    transactions: state.transactions
   };
 };
 

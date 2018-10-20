@@ -9,7 +9,8 @@ import AccountsSidebar from "../components/AccountsSidebar";
 
 import { fetchAccounts } from "../actions/accounts";
 import { fetchCategories } from "../actions/categories";
-import { fetchBudgetCategories } from "../actions/budgetCategories";
+import { fetchCurrentBudget } from "../actions/currentBudget";
+import { fetchTransactions } from "../actions/transactions";
 
 class BudgetContainer extends Component {
   componentDidMount() {
@@ -17,11 +18,12 @@ class BudgetContainer extends Component {
 
     this.props.fetchAccounts(budgetId);
     this.props.fetchCategories();
-    this.props.fetchBudgetCategories(budgetId);
+    this.props.fetchCurrentBudget(budgetId);
+    this.props.fetchTransactions();
   }
 
   render() {
-    const { accounts } = this.props;
+    const { accounts, currentBudget } = this.props;
 
     return (
       <Container>
@@ -36,7 +38,7 @@ class BudgetContainer extends Component {
             </Row>
           </Col>
           <Col xs="9">
-            <BudgetMonthContainer />
+            <BudgetMonthContainer currentBudget={currentBudget} />
           </Col>
         </Row>
       </Container>
@@ -46,13 +48,14 @@ class BudgetContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    accounts: state.accounts
+    accounts: state.accounts,
+    currentBudget: state.currentBudget
   };
 };
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { fetchAccounts, fetchCategories, fetchBudgetCategories }
+    { fetchAccounts, fetchCategories, fetchCurrentBudget, fetchTransactions }
   )(BudgetContainer)
 );

@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 
 import FormSlider from "./FormSlider";
+import { createTransaction, addTransaction } from "../actions/transactions";
 
 class TransactionForm extends Component {
   state = {
@@ -25,7 +26,7 @@ class TransactionForm extends Component {
     description: "",
     amount: 0,
     date: moment(),
-    account: null
+    account_id: 0
   };
 
   toggle = () => {
@@ -44,6 +45,34 @@ class TransactionForm extends Component {
     this.setState({ date: newDate });
   };
 
+  handleFormSubmit = e => {
+    const { name, description, amount, date, account_id } = this.state;
+    const { category, createTransaction } = this.props;
+    const transaction = {
+      transaction: {
+        category_id: category.id,
+        date: date._d,
+        account_id: Number(account_id),
+        name,
+        description,
+        amount
+      }
+    };
+
+    e.preventDefault();
+    createTransaction(transaction);
+
+    this.setState({
+      ...this.state,
+      name: "",
+      description: "",
+      amount: 0,
+      date: moment(),
+      account_id: 0
+    });
+    this.toggle();
+  };
+
   render() {
     const { accounts } = this.props;
 
@@ -53,7 +82,7 @@ class TransactionForm extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader>New Transaction</ModalHeader>
           <ModalBody>
-            <Form>
+            <Form onSubmit={this.handleFormSubmit}>
               <FormGroup>
                 <Label for="name">Name</Label>
                 <Input
@@ -100,18 +129,21 @@ class TransactionForm extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="account">Account</Label>
+                <Label for="account_id">Account</Label>
                 <Input
                   type="select"
-                  name="account"
-                  id="account"
-                  value={this.state.account}
+                  name="account_id"
+                  id="account_id"
+                  value={this.state["account_id"]}
                   onChange={e =>
                     this.handleFormChange(e.target.name, e.target.value)
                   }
                 >
+                  <option value={0}>Select an account</option>
                   {accounts.map(a => (
-                    <option>{a.nickname}</option>
+                    <option key={a.id} value={a.id}>
+                      {a.nickname}
+                    </option>
                   ))}
                 </Input>
               </FormGroup>
@@ -130,4 +162,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(TransactionForm));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { createTransaction, addTransaction }
+  )(TransactionForm)
+);

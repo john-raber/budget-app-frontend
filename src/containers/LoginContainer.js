@@ -9,13 +9,13 @@ const LoginContainer = props => {
   return (
     <Container fluid>
       <Row>
-        <Col md={{ size: 2, offset: 4 }}>
+        <Col md={{ size: 3, offset: 3 }}>
           <Jumbotron>
             <h3>Sign In</h3>
             <LoginForm />
           </Jumbotron>
         </Col>
-        <Col md={{ size: 2 }}>
+        <Col md={{ size: 3 }}>
           <Jumbotron>
             <h3>Register</h3>
             <NewUserForm />
