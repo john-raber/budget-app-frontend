@@ -33,7 +33,11 @@ const CategoryTable = ({ categories, transactions, currentBudget }) => {
                   {`$${transactions
                     .filter(t => t.category.id === c.id)
                     .reduce((total, n) => {
-                      return total + Number(n.amount);
+                      if (n.transaction_type === "income") {
+                        return total - Number(n.amount);
+                      } else {
+                        return total + Number(n.amount);
+                      }
                     }, 0)
                     .toFixed(2)}`}{" "}
                   <TransactionForm category={c} />
@@ -44,7 +48,11 @@ const CategoryTable = ({ categories, transactions, currentBudget }) => {
                     transactions
                       .filter(t => t.category.id === c.id)
                       .reduce((total, n) => {
-                        return total + Number(n.amount);
+                        if (n.transaction_type === "income") {
+                          return total - Number(n.amount);
+                        } else {
+                          return total + Number(n.amount);
+                        }
                       }, 0)
                   ).toFixed(2)}
                 </th>

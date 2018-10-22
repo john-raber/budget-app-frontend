@@ -26,7 +26,8 @@ class TransactionForm extends Component {
     description: "",
     amount: 0,
     date: moment(),
-    account_id: 0
+    account_id: 0,
+    transaction_type: "expense"
   };
 
   toggle = () => {
@@ -46,7 +47,14 @@ class TransactionForm extends Component {
   };
 
   handleFormSubmit = e => {
-    const { name, description, amount, date, account_id } = this.state;
+    const {
+      name,
+      description,
+      amount,
+      date,
+      account_id,
+      transaction_type
+    } = this.state;
     const { category, createTransaction } = this.props;
     const transaction = {
       transaction: {
@@ -55,7 +63,8 @@ class TransactionForm extends Component {
         account_id: Number(account_id),
         name,
         description,
-        amount
+        amount,
+        transaction_type
       }
     };
 
@@ -68,7 +77,8 @@ class TransactionForm extends Component {
       description: "",
       amount: 0,
       date: moment(),
-      account_id: 0
+      account_id: 0,
+      transaction_type: "expense"
     });
     this.toggle();
   };
@@ -104,6 +114,36 @@ class TransactionForm extends Component {
                     this.handleFormChange(e.target.name, e.target.value)
                   }
                 />
+              </FormGroup>
+              <FormGroup tag="fieldset">
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="transaction_type"
+                      value="income"
+                      onChange={e =>
+                        this.handleFormChange(e.target.name, e.target.value)
+                      }
+                      checked={this.state.transaction_type === "income"}
+                    />{" "}
+                    Income
+                  </Label>
+                </FormGroup>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="transaction_type"
+                      value="expense"
+                      onChange={e =>
+                        this.handleFormChange(e.target.name, e.target.value)
+                      }
+                      checked={this.state.transaction_type === "expense"}
+                    />{" "}
+                    Expense
+                  </Label>
+                </FormGroup>
               </FormGroup>
               <FormGroup>
                 <Label for="amount">Amount</Label>
