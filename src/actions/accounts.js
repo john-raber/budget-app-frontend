@@ -13,25 +13,17 @@ function fetchedAccounts(accounts) {
   return { type: FETCHED_ACCOUNTS, accounts };
 }
 
-function fetchAccounts(budgetId) {
+function fetchAccounts() {
   return dispatch => {
     const token = localStorage.getItem("token");
 
-    fetch(ACCOUNTS_URL, {
+    return fetch(ACCOUNTS_URL, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${token}`
       }
-    })
-      .then(r => r.json())
-      .then(accounts => {
-        dispatch(
-          fetchedAccounts(
-            accounts.filter(a => a.budget_id === Number(budgetId))
-          )
-        );
-      });
+    }).then(r => r.json());
   };
 }
 

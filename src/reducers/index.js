@@ -6,6 +6,7 @@ import accountsReducer from "./accountsReducer";
 import categoriesReducer from "./categoriesReducer";
 import currentBudgetReducer from "./currentBudgetReducer";
 import transactionsReducer from "./transactionsReducer";
+import currentAccountReducer from "./currentAccountReducer";
 
 const rootReducer = combineReducers({
   currentUser: currentUserReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   accounts: accountsReducer,
   categories: categoriesReducer,
   currentBudget: currentBudgetReducer,
-  transactions: transactionsReducer
+  transactions: transactionsReducer,
+  currentAccount: currentAccountReducer
 });
 
 export default rootReducer;

@@ -7,6 +7,7 @@ import LoginContainer from "./LoginContainer";
 import ProfileContainer from "./ProfileContainer";
 import BudgetFormContainer from "./BudgetFormContainer";
 import BudgetContainer from "./BudgetContainer";
+import TransactionContainer from "./TransactionContainer";
 import { setUserFromToken } from "../actions/users";
 
 class App extends Component {
@@ -23,6 +24,10 @@ class App extends Component {
             exact
             path="/profile/add-budget"
             component={BudgetFormContainer}
+          />
+          <Route
+            path="/profile/:budgetId/:accountNickname"
+            component={TransactionContainer}
           />
           <Route path="/profile/:budgetId" component={BudgetContainer} />
           <Route path="/profile" component={ProfileContainer} />

@@ -2,6 +2,8 @@ export const SET_USER = "SET_USER";
 
 export const SET_CURRENT_BUDGET = "SET_CURRENT_BUDGET";
 
+export const SET_CURRENT_ACCOUNT = "SET_CURRENT_ACCOUNT";
+
 export const ADD_BUDGET = "ADD_BUDGET";
 export const FETCHED_USER_BUDGETS = "FETCHED_USER_BUDGETS";
 

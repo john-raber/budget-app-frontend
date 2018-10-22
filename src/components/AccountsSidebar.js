@@ -1,14 +1,36 @@
 import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { ButtonGroup, Button } from "reactstrap";
 
-const AccountsSidebar = props => {
+import { setCurrentAccount } from "../actions/currentAccount";
+
+const AccountsSidebar = ({
+  accounts,
+  setCurrentAccount,
+  history,
+  location
+}) => {
   return (
     <ButtonGroup vertical>
-      {props.accounts.map(a => (
-        <Button key={a.id}>{a.nickname}</Button>
+      {accounts.map(a => (
+        <Button
+          key={a.id}
+          onClick={() => {
+            setCurrentAccount(a);
+            history.push(`${location.pathname}/${a.nickname.toLowerCase()}`);
+          }}
+        >
+          {a.nickname}
+        </Button>
       ))}
     </ButtonGroup>
   );
 };
 
-export default AccountsSidebar;
+export default withRouter(
+  connect(
+    null,
+    { setCurrentAccount }
+  )(AccountsSidebar)
+);

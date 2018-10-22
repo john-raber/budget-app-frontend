@@ -39,6 +39,11 @@ class NavMenu extends Component {
                   </NavLink>
                 </NavItem>
               </Route>
+              <Route exact path="/">
+                <NavItem>
+                  <NavLink href="/login">Sign in / Sign up</NavLink>
+                </NavItem>
+              </Route>
             </Switch>
           </Nav>
         </Collapse>
