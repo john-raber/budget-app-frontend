@@ -39,7 +39,7 @@ function createAccount({ account }) {
   return dispatch => {
     const token = localStorage.getItem("token");
 
-    fetch(ACCOUNTS_URL, {
+    return fetch(ACCOUNTS_URL, {
       method: "POST",
       body: JSON.stringify({ account }),
       headers: {
@@ -47,11 +47,7 @@ function createAccount({ account }) {
         Accept: "application/json",
         Authorization: `Bearer ${token}`
       }
-    })
-      .then(r => r.json())
-      .then(acct => {
-        dispatch(addAccount(acct));
-      });
+    }).then(r => r.json());
   };
 }
 

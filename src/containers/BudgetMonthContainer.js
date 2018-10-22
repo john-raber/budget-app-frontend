@@ -14,7 +14,6 @@ const BudgetMonthContainer = ({
   return (
     <Jumbotron>
       <h4 className="display-4">October 2018</h4>
-      <p className="lead">$403 left to allocate</p>
       <hr className="my-2" />
       <CategoryTable
         currentBudget={currentBudget}

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import moment from "moment";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 import FormSlider from "./FormSlider";
 
-import { createAccount } from "../actions/accounts";
+import { createAccount, addAccount } from "../actions/accounts";
+import { createCategory, addCategory } from "../actions/categories";
+import { createTransaction, addTransaction } from "../actions/transactions";
 
 class AccountForm extends Component {
   state = {
@@ -22,7 +25,45 @@ class AccountForm extends Component {
     };
 
     e.preventDefault();
-    this.props.createAccount(account);
+    const savingCategory = this.props.categories.find(
+      c =>
+        c.name.includes("saving") &&
+        Number(this.props.match.params.budgetId) === c.budget.id
+    );
+    this.props.createAccount(account).then(acct => {
+      this.props.addAccount(acct);
+
+      let newAccount = acct.account;
+
+      if (!!savingCategory) {
+        // if there is already a saving category, then I will add the balance of the new account to that category.
+        // I will add the balance to this account through a transaction
+        const transaction = {
+          transaction: {
+            name: "account creation",
+            description: `account creation: ${newAccount.nickname}`,
+            amount: this.state.acctBalance,
+            date: moment()._d,
+            transaction_type: "income",
+            account_id: newAccount.id,
+            category_id: savingCategory.id
+          }
+        };
+        this.props.createTransaction(transaction);
+      } else {
+        // if there is no saving category already in place, then I will create a generic saving category and put the new balance there
+        const category = {
+          category: {
+            name: "saving",
+            budget_id: this.props.currentBudget.id,
+            balance: this.state.acctBalance
+          }
+        };
+        this.props
+          .createCategory(category)
+          .then(cat => this.props.addCategory(cat.category));
+      }
+    });
     this.setState({ nickname: "" });
   };
 
@@ -65,9 +106,23 @@ class AccountForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    categories: state.categories,
+    currentBudget: state.currentBudget
+  };
+};
+
 export default withRouter(
   connect(
-    null,
-    { createAccount }
+    mapStateToProps,
+    {
+      createAccount,
+      addAccount,
+      createTransaction,
+      addTransaction,
+      createCategory,
+      addCategory
+    }
   )(AccountForm)
 );
