@@ -5,14 +5,13 @@ const AccountTransactionTable = ({ currentAccount, transactions }) => {
   return (
     <Fragment>
       <h3>{currentAccount.nickname}</h3>
-      <Table>
+      <Table hover>
         <thead>
           <tr>
             <th>Name</th>
             <th>Description</th>
             <th>Category</th>
             <th>Amount</th>
-            <th>Balance</th>
           </tr>
         </thead>
         <tbody>
@@ -20,9 +19,8 @@ const AccountTransactionTable = ({ currentAccount, transactions }) => {
             <tr key={t.id} transaction={t}>
               <th>{t.name}</th>
               <th>{t.description}</th>
-              <th>{t.category.nickname}</th>
-              <th>{t.amount}</th>
-              <th>Updated Balance</th>
+              <th>{t.category.name}</th>
+              <th>${Number(t.amount).toFixed(2)}</th>
             </tr>
           ))}
         </tbody>

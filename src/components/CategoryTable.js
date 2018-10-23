@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { Table } from "reactstrap";
-import { FaEdit } from "react-icons/fa";
 
 import CategoryForm from "../components/CategoryForm";
 import TransactionForm from "../components/TransactionForm";
@@ -16,7 +15,9 @@ const CategoryTable = ({ categories, transactions, currentBudget }) => {
               Category <CategoryForm currentBudget={currentBudget} />
             </th>
             <th>Starting Balance</th>
-            <th>Transactions</th>
+            <th>
+              Transactions <TransactionForm categories={categories} />
+            </th>
             <th>Ending Balance</th>
           </tr>
         </thead>
@@ -25,10 +26,7 @@ const CategoryTable = ({ categories, transactions, currentBudget }) => {
             return (
               <tr key={c.id}>
                 <th scope="row">{c.name}</th>
-                <th scope="row">
-                  {`$${Number(c.balance).toFixed(2)}`}{" "}
-                  <FaEdit color="darkRed" />
-                </th>
+                <th scope="row">{`$${Number(c.balance).toFixed(2)}`}</th>
                 <th scope="row">
                   {`$${transactions
                     .filter(t => t.category.id === c.id)
@@ -39,10 +37,10 @@ const CategoryTable = ({ categories, transactions, currentBudget }) => {
                         return total + Number(n.amount);
                       }
                     }, 0)
-                    .toFixed(2)}`}{" "}
-                  <TransactionForm category={c} />
+                    .toFixed(2)}`}
                 </th>
                 <th scope="row">
+                  $
                   {(
                     c.balance -
                     transactions

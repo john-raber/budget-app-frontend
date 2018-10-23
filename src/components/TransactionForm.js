@@ -27,6 +27,7 @@ class TransactionForm extends Component {
     amount: 0,
     date: moment(),
     account_id: 0,
+    category_id: 0,
     transaction_type: "expense"
   };
 
@@ -53,14 +54,15 @@ class TransactionForm extends Component {
       amount,
       date,
       account_id,
+      category_id,
       transaction_type
     } = this.state;
-    const { category, createTransaction } = this.props;
+    const { createTransaction } = this.props;
     const transaction = {
       transaction: {
-        category_id: category.id,
         date: date._d,
         account_id: Number(account_id),
+        category_id: Number(category_id),
         name,
         description,
         amount,
@@ -78,13 +80,14 @@ class TransactionForm extends Component {
       amount: 0,
       date: moment(),
       account_id: 0,
+      category_id: 0,
       transaction_type: "expense"
     });
     this.toggle();
   };
 
   render() {
-    const { accounts } = this.props;
+    const { accounts, categories } = this.props;
 
     return (
       <Fragment>
@@ -183,6 +186,25 @@ class TransactionForm extends Component {
                   {accounts.map(a => (
                     <option key={a.id} value={a.id}>
                       {a.nickname}
+                    </option>
+                  ))}
+                </Input>
+              </FormGroup>
+              <FormGroup>
+                <Label for="category_id">Category</Label>
+                <Input
+                  type="select"
+                  name="category_id"
+                  id="category_id"
+                  value={this.state["category_id"]}
+                  onChange={e =>
+                    this.handleFormChange(e.target.name, e.target.value)
+                  }
+                >
+                  <option value={0}>Select a category</option>
+                  {categories.map(c => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
                     </option>
                   ))}
                 </Input>
