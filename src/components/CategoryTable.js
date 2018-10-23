@@ -1,42 +1,59 @@
 import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { Table } from "reactstrap";
-import { FaEdit } from "react-icons/fa";
 
 import CategoryForm from "../components/CategoryForm";
 import TransactionForm from "../components/TransactionForm";
 
-const CategoryTable = ({ categories, budgetCategories, categoriesToShow }) => {
+const CategoryTable = ({ categories, transactions, currentBudget }) => {
   return (
     <Fragment>
       <Table hover>
         <thead>
           <tr>
             <th>
-              Category <CategoryForm />
+              Category <CategoryForm currentBudget={currentBudget} />
             </th>
             <th>Starting Balance</th>
-            <th>Transactions</th>
+            <th>
+              Transactions <TransactionForm categories={categories} />
+            </th>
             <th>Ending Balance</th>
           </tr>
         </thead>
         <tbody>
-          {budgetCategories.map(bc => {
-            let cat = categories.find(c => {
-              return c.id === bc.category_id;
-            });
-
+          {categories.map(c => {
             return (
-              <tr key={cat.id}>
-                <th scope="row">{cat.name}</th>
+              <tr key={c.id}>
+                <th scope="row">{c.name}</th>
+                <th scope="row">{`$${Number(c.balance).toFixed(2)}`}</th>
                 <th scope="row">
-                  {`$${Number(bc.balance).toFixed(2)}`}{" "}
-                  <FaEdit color="darkRed" />
+                  {`$${transactions
+                    .filter(t => t.category.id === c.id)
+                    .reduce((total, n) => {
+                      if (n.transaction_type === "income") {
+                        return total - Number(n.amount);
+                      } else {
+                        return total + Number(n.amount);
+                      }
+                    }, 0)
+                    .toFixed(2)}`}
                 </th>
                 <th scope="row">
-                  {(2.45).toFixed(2)} <TransactionForm category={cat} />
+                  $
+                  {(
+                    c.balance -
+                    transactions
+                      .filter(t => t.category.id === c.id)
+                      .reduce((total, n) => {
+                        if (n.transaction_type === "income") {
+                          return total - Number(n.amount);
+                        } else {
+                          return total + Number(n.amount);
+                        }
+                      }, 0)
+                  ).toFixed(2)}
                 </th>
-                <th scope="row">{(bc.balance - 2.45).toFixed(2)}</th>
               </tr>
             );
           })}

@@ -14,16 +14,7 @@ import {
 } from "reactstrap";
 
 import FormSlider from "./FormSlider";
-import {
-  createCategory,
-  addCategory,
-  fetchCategory
-} from "../actions/categories";
-
-import {
-  createBudgetCategory,
-  addBudgetCategory
-} from "../actions/budgetCategories";
+import { createCategory, addCategory } from "../actions/categories";
 
 class CategoryForm extends Component {
   state = {
@@ -45,9 +36,14 @@ class CategoryForm extends Component {
   };
 
   handleFormSubmit = e => {
+    const { name, balance } = this.state;
+    const { currentBudget } = this.props;
+
     const category = {
       category: {
-        name: this.state.name
+        budget_id: currentBudget.id,
+        name,
+        balance
       }
     };
     e.preventDefault();
@@ -57,26 +53,13 @@ class CategoryForm extends Component {
     // because the category has not been associated with the budget yet,
     // therefore the category won't be included in our categoriesToShow prop.
     this.props.createCategory(category).then(cat => {
-      console.log("category after create: ", cat);
-      const budget_category = {
-        budget_category: {
-          budget_id: Number(this.props.match.params.budgetId), // budgetId from the URL will be a string so I will convert it to a number for the fetch
-          category_id: cat.category.id,
-          balance: Number(this.state.balance) // the target in state could be a string if input with the input field instead of slider, so I will convert it just in case
-        }
-      };
+      // After creating the connection between the category and the budget, we
+      // fetch the category so that it will have the budget included in the json
+      // that is returned and we can add that version to our redux store;
 
-      // Once we have the category created the budgetCategory can be created;
-      this.props.createBudgetCategory(budget_category).then(bCategory => {
-        // The budgetCategory can be added to the store right away
-        this.props.addBudgetCategory(bCategory);
-
-        // After creating the connection between the category and the budget, we
-        // fetch the category so that it will have the budget included in the json
-        // that is returned and we can add that version to our redux store;
-        this.props.fetchCategory(cat.category.id);
-        this.props.history.push(this.props.location.pathname);
-      });
+      // ------  just add the new category instead of fetching it -----
+      this.props.addCategory(cat.category);
+      this.props.history.push(this.props.location.pathname);
     });
     this.setState({ name: "" });
     this.toggle();
@@ -102,7 +85,7 @@ class CategoryForm extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="target" id="target">
+                <Label for="balance" id="balance">
                   Starting Balance
                 </Label>
                 {/* After updating target state with the input field the value
@@ -137,10 +120,7 @@ export default withRouter(
     null,
     {
       createCategory,
-      createBudgetCategory,
-      addCategory,
-      addBudgetCategory,
-      fetchCategory
+      addCategory
     }
   )(CategoryForm)
 );

@@ -29,7 +29,6 @@ function fetchBudgets(userId) {
     })
       .then(r => r.json())
       .then(budgets => {
-        // console.log("budgets: ", budgets);
         dispatch(fetchedUserBudgets(budgets.filter(b => b.user_id === userId)));
       });
   };

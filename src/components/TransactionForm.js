@@ -17,8 +17,7 @@ import {
 } from "reactstrap";
 
 import FormSlider from "./FormSlider";
-
-import { createTransaction } from "../actions/transactions";
+import { createTransaction, addTransaction } from "../actions/transactions";
 
 class TransactionForm extends Component {
   state = {
@@ -27,7 +26,9 @@ class TransactionForm extends Component {
     description: "",
     amount: 0,
     date: moment(),
-    account_id: 0
+    account_id: 0,
+    category_id: 0,
+    transaction_type: "expense"
   };
 
   toggle = () => {
@@ -47,37 +48,46 @@ class TransactionForm extends Component {
   };
 
   handleFormSubmit = e => {
-    e.persist();
-
-    const category_id = this.props.category.id;
-
+    const {
+      name,
+      description,
+      amount,
+      date,
+      account_id,
+      category_id,
+      transaction_type
+    } = this.state;
+    const { createTransaction } = this.props;
     const transaction = {
       transaction: {
-        ...this.state,
-        date: this.state.date._d,
-        account_id: Number(this.state["account_id"]),
-        category_id
+        date: date._d,
+        account_id: Number(account_id),
+        category_id: Number(category_id),
+        name,
+        description,
+        amount,
+        transaction_type
       }
     };
 
-    this.props
-      .createTransaction(transaction)
-      .then(transaction => console.log(transaction.transaction));
-
     e.preventDefault();
+    createTransaction(transaction);
+    
     this.setState({
       ...this.state,
       name: "",
       description: "",
       amount: 0,
       date: moment(),
-      account_id: 0
+      account_id: 0,
+      category_id: 0,
+      transaction_type: "expense"
     });
     this.toggle();
   };
 
   render() {
-    const { accounts } = this.props;
+    const { accounts, categories } = this.props;
 
     return (
       <Fragment>
@@ -107,6 +117,36 @@ class TransactionForm extends Component {
                     this.handleFormChange(e.target.name, e.target.value)
                   }
                 />
+              </FormGroup>
+              <FormGroup tag="fieldset">
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="transaction_type"
+                      value="income"
+                      onChange={e =>
+                        this.handleFormChange(e.target.name, e.target.value)
+                      }
+                      checked={this.state.transaction_type === "income"}
+                    />{" "}
+                    Income
+                  </Label>
+                </FormGroup>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="transaction_type"
+                      value="expense"
+                      onChange={e =>
+                        this.handleFormChange(e.target.name, e.target.value)
+                      }
+                      checked={this.state.transaction_type === "expense"}
+                    />{" "}
+                    Expense
+                  </Label>
+                </FormGroup>
               </FormGroup>
               <FormGroup>
                 <Label for="amount">Amount</Label>
@@ -142,10 +182,29 @@ class TransactionForm extends Component {
                     this.handleFormChange(e.target.name, e.target.value)
                   }
                 >
-                  <option value="">Select an account</option>
+                  <option value={0}>Select an account</option>
                   {accounts.map(a => (
                     <option key={a.id} value={a.id}>
                       {a.nickname}
+                    </option>
+                  ))}
+                </Input>
+              </FormGroup>
+              <FormGroup>
+                <Label for="category_id">Category</Label>
+                <Input
+                  type="select"
+                  name="category_id"
+                  id="category_id"
+                  value={this.state["category_id"]}
+                  onChange={e =>
+                    this.handleFormChange(e.target.name, e.target.value)
+                  }
+                >
+                  <option value={0}>Select a category</option>
+                  {categories.map(c => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
                     </option>
                   ))}
                 </Input>
@@ -168,6 +227,6 @@ const mapStateToProps = state => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { createTransaction }
+    { createTransaction, addTransaction }
   )(TransactionForm)
 );

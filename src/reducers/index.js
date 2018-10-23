@@ -4,16 +4,18 @@ import currentUserReducer from "./currentUserReducer";
 import budgetsReducer from "./budgetsReducer";
 import accountsReducer from "./accountsReducer";
 import categoriesReducer from "./categoriesReducer";
-import budgetCategoriesReducer from "./budgetCategoriesReducer";
+import currentBudgetReducer from "./currentBudgetReducer";
 import transactionsReducer from "./transactionsReducer";
+import currentAccountReducer from "./currentAccountReducer";
 
 const rootReducer = combineReducers({
   currentUser: currentUserReducer,
   budgets: budgetsReducer,
   accounts: accountsReducer,
   categories: categoriesReducer,
-  budgetCategories: budgetCategoriesReducer,
-  transactions: transactionsReducer
+  currentBudget: currentBudgetReducer,
+  transactions: transactionsReducer,
+  currentAccount: currentAccountReducer
 });
 
 export default rootReducer;

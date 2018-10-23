@@ -26,16 +26,24 @@ class NavMenu extends Component {
 
   render() {
     return (
-      <Navbar>
-        <NavbarBrand href="/">Budgetr</NavbarBrand>
-        <NavbarToggler />
+      <Navbar dark>
+        <NavbarBrand href="/">
+          <strong>Budgetr</strong>
+        </NavbarBrand>
         <Collapse isOpen={this.state.isOpen}>
           <Nav className="ml-auto">
             <Switch>
               <Route path="/profile">
                 <NavItem>
                   <NavLink href="/login" onClick={this.props.logoutUser}>
-                    Logout
+                    <strong>Logout</strong>
+                  </NavLink>
+                </NavItem>
+              </Route>
+              <Route exact path="/">
+                <NavItem>
+                  <NavLink href="/login">
+                    <strong>Sign in / Sign up</strong>
                   </NavLink>
                 </NavItem>
               </Route>

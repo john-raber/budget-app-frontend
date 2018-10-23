@@ -7,21 +7,29 @@ import BudgetMonthContainer from "./BudgetMonthContainer";
 import AccountForm from "../components/AccountForm";
 import AccountsSidebar from "../components/AccountsSidebar";
 
-import { fetchAccounts } from "../actions/accounts";
+import { fetchAccounts, fetchedAccounts } from "../actions/accounts";
 import { fetchCategories } from "../actions/categories";
-import { fetchBudgetCategories } from "../actions/budgetCategories";
+import { fetchCurrentBudget } from "../actions/currentBudget";
+import { fetchTransactions } from "../actions/transactions";
 
 class BudgetContainer extends Component {
   componentDidMount() {
     const { budgetId } = this.props.match.params;
 
-    this.props.fetchAccounts(budgetId);
+    this.props.fetchAccounts().then(accounts => {
+      this.props.fetchedAccounts(
+        accounts.filter(
+          a => a.budget_id === Number(this.props.match.params.budgetId)
+        )
+      );
+    });
     this.props.fetchCategories();
-    this.props.fetchBudgetCategories(budgetId);
+    this.props.fetchCurrentBudget(budgetId);
+    this.props.fetchTransactions();
   }
 
   render() {
-    const { accounts } = this.props;
+    const { accounts, currentBudget } = this.props;
 
     return (
       <Container>
@@ -36,7 +44,7 @@ class BudgetContainer extends Component {
             </Row>
           </Col>
           <Col xs="9">
-            <BudgetMonthContainer />
+            <BudgetMonthContainer currentBudget={currentBudget} />
           </Col>
         </Row>
       </Container>
@@ -46,13 +54,20 @@ class BudgetContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    accounts: state.accounts
+    accounts: state.accounts,
+    currentBudget: state.currentBudget
   };
 };
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { fetchAccounts, fetchCategories, fetchBudgetCategories }
+    {
+      fetchAccounts,
+      fetchedAccounts,
+      fetchCategories,
+      fetchCurrentBudget,
+      fetchTransactions
+    }
   )(BudgetContainer)
 );

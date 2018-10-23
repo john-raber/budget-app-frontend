@@ -35,7 +35,6 @@ function fetchCategories() {
 }
 
 function fetchCategory(id) {
-  console.log("fetchCategory called");
   return dispatch => {
     const token = localStorage.getItem("token");
 
@@ -46,7 +45,6 @@ function fetchCategory(id) {
     })
       .then(r => r.json())
       .then(category => {
-        console.log("category fetch result: ", category);
         dispatch(addCategory(category));
       });
   };

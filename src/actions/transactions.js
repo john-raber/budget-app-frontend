@@ -16,6 +16,24 @@ function fetchedTransactions(transactions) {
   };
 }
 
+function fetchTransactions() {
+  return dispatch => {
+    const token = localStorage.getItem("token");
+
+    fetch(TRANSACTIONS_URL, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(r => r.json())
+      .then(transactions => {
+        dispatch(fetchedTransactions(transactions));
+      });
+  };
+}
+
 function createTransaction({ transaction }) {
   return dispatch => {
     const token = localStorage.getItem("token");
@@ -28,8 +46,10 @@ function createTransaction({ transaction }) {
         Accept: "application/json",
         Authorization: `Bearer ${token}`
       }
-    }).then(r => r.json());
+    })
+      .then(r => r.json())
+      .then(transaction => dispatch(addTransaction(transaction.transaction)));
   };
 }
 
-export { createTransaction };
+export { createTransaction, fetchTransactions, addTransaction };
