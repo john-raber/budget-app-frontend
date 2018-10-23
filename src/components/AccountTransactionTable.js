@@ -15,14 +15,16 @@ const AccountTransactionTable = ({ currentAccount, transactions }) => {
           </tr>
         </thead>
         <tbody>
-          {transactions.map(t => (
-            <tr key={t.id} transaction={t}>
-              <th>{t.name}</th>
-              <th>{t.description}</th>
-              <th>{t.category.name}</th>
-              <th>${Number(t.amount).toFixed(2)}</th>
-            </tr>
-          ))}
+          {transactions
+            .filter(t => t.account.id === currentAccount.id)
+            .map(t => (
+              <tr key={t.id} transaction={t}>
+                <th>{t.name}</th>
+                <th>{t.description}</th>
+                <th>{t.category.name}</th>
+                <th>${Number(t.amount).toFixed(2)}</th>
+              </tr>
+            ))}
         </tbody>
       </Table>
     </Fragment>

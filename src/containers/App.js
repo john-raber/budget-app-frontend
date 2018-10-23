@@ -26,7 +26,11 @@ class App extends Component {
             component={BudgetFormContainer}
           />
           <Route
-            path="/profile/:budgetId/:accountNickname"
+            path="/profile/:budgetId/accounts/:accountNickname"
+            component={TransactionContainer}
+          />
+          <Route
+            path="/profile/:budgetId/categories/:categoryId"
             component={TransactionContainer}
           />
           <Route path="/profile/:budgetId" component={BudgetContainer} />

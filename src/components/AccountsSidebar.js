@@ -9,6 +9,7 @@ const AccountsSidebar = ({
   accounts,
   setCurrentAccount,
   history,
+  match,
   location
 }) => {
   return (
@@ -18,7 +19,12 @@ const AccountsSidebar = ({
           key={a.id}
           onClick={() => {
             setCurrentAccount(a);
-            history.push(`${location.pathname}/${a.nickname.toLowerCase()}`);
+            history.push(
+              `/profile/${match.params.budgetId}/accounts/${a.nickname
+                .toLowerCase()
+                .split(" ")
+                .join("-")}`
+            );
           }}
         >
           {a.nickname}

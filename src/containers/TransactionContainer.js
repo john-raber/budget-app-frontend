@@ -9,21 +9,6 @@ import { setCurrentAccount } from "../actions/currentAccount";
 import { fetchAccounts, fetchedAccounts } from "../actions/accounts";
 
 class TransactionContainer extends Component {
-  componentDidMount() {
-    this.props.fetchAccounts().then(accounts => {
-      this.props.fetchedAccounts(
-        accounts.filter(
-          a => a.budget_id === Number(this.props.match.params.budgetId)
-        )
-      );
-      this.props.setCurrentAccount(
-        accounts.find(
-          a => a.nickname === this.props.match.params.accountNickname
-        )
-      );
-    });
-  }
-
   render() {
     const { accounts, currentAccount, transactions } = this.props;
     return (
