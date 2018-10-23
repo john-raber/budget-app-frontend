@@ -72,7 +72,7 @@ class TransactionForm extends Component {
 
     e.preventDefault();
     createTransaction(transaction);
-
+    
     this.setState({
       ...this.state,
       name: "",
