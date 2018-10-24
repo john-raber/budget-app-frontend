@@ -28,7 +28,7 @@ class ProfileContainer extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col md={{ size: "auto", offset: 4 }}>
+          <Col md={{ size: 8, offset: 2 }}>
             <CardDeck>
               {budgets.map(b => (
                 <BudgetCard key={b.id} budget={b} />

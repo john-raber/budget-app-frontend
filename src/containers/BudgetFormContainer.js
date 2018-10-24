@@ -8,7 +8,7 @@ const BudgetFormContainer = props => {
   return (
     <Container fluid>
       <Row>
-        <Col md={{ size: 2, offset: 5 }}>
+        <Col md={{ size: 3, offset: 5 }}>
           <Jumbotron>
             <h3>New Budget</h3>
             <BudgetForm />

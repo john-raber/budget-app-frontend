@@ -4,7 +4,9 @@ import { Table } from "reactstrap";
 const AccountTransactionTable = ({ currentAccount, transactions }) => {
   return (
     <Fragment>
-      <h3>{currentAccount.nickname}</h3>
+      <h3>
+        <strong>{currentAccount.nickname}</strong>
+      </h3>
       <Table hover>
         <thead>
           <tr>

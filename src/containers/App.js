@@ -8,6 +8,7 @@ import ProfileContainer from "./ProfileContainer";
 import BudgetFormContainer from "./BudgetFormContainer";
 import BudgetContainer from "./BudgetContainer";
 import TransactionContainer from "./TransactionContainer";
+import LandingContainer from "./LandingContainer";
 import { setUserFromToken } from "../actions/users";
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
           <Route path="/profile/:budgetId" component={BudgetContainer} />
           <Route path="/profile" component={ProfileContainer} />
           <Route path="/login" component={LoginContainer} />
+          <Route path="/" component={LandingContainer} />
         </Switch>
       </div>
     );
