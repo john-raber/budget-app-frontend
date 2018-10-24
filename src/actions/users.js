@@ -1,5 +1,7 @@
 import { SET_USER } from "./types";
 
+import { loading } from "./loading";
+
 const USERS_URL = "http://localhost:3001/api/v1/users";
 const LOGIN_URL = "http://localhost:3001/api/v1/login";
 const PROFILE_URL = "http://localhost:3001/api/v1/profile";
@@ -14,6 +16,8 @@ function setUser(user) {
 function setUserFromToken() {
   return dispatch => {
     let token = localStorage.getItem("token");
+
+    dispatch(loading());
 
     if (!token || token === "") {
       return;

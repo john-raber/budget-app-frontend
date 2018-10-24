@@ -35,7 +35,7 @@ class AccountForm extends Component {
 
       let newAccount = acct.account;
 
-      if (!!savingCategory) {
+      if (!!savingCategory && this.state.acctBalance > 0) {
         // if there is already a saving category, then I will add the balance of the new account to that category.
         // I will add the balance to this account through a transaction
         const transaction = {

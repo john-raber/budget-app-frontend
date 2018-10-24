@@ -1,4 +1,5 @@
 import { ADD_BUDGET, FETCHED_USER_BUDGETS } from "./types";
+import { loading } from "./loading";
 
 const BUDGETS_URL = "http://localhost:3001/api/v1/budgets";
 
@@ -19,6 +20,8 @@ function fetchedUserBudgets(budgets) {
 function fetchBudgets(userId) {
   return dispatch => {
     const token = localStorage.getItem("token");
+
+    dispatch(loading());
 
     fetch(BUDGETS_URL, {
       headers: {
