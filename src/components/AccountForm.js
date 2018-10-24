@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Jumbotron } from "reactstrap";
 
 import FormSlider from "./FormSlider";
 
@@ -77,7 +77,7 @@ class AccountForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleFormSubmit}>
+      <Form id="account-form" onSubmit={this.handleFormSubmit}>
         <FormGroup>
           <Label for="nickname">Nickname: </Label>
           <Input

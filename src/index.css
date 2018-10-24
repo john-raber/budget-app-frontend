@@ -17,6 +17,32 @@ code {
     monospace;
 }
 
+/* setting the login/logout navlinks text color */
 .nav-item a {
   color: rgb(255, 255, 255);
+}
+
+/* setting the background and text colors for the button group */
+.btn-group-vertical > button {
+  background-color: rgb(230, 233, 237);
+  color: rgb(0, 0, 0);
+}
+
+/* setting the text color for the account form */
+/* .col-3 :last-child h5 {
+  color: rgb(255, 255, 255);
+} */
+
+/* setting the top margin for the */
+.col-3 .row:nth-child(2) {
+  margin-top: 2em;
+}
+
+/* #account-form button {
+  background-color: rgb(230, 233, 237);
+  color: rgb(0, 0, 0);
+} */
+
+.rc-slider-track {
+  background-color: rgb(0, 0, 0);
 }

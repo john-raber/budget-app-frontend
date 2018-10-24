@@ -17,7 +17,7 @@ function fetchedUserBudgets(budgets) {
   };
 }
 
-function fetchBudgets(userId) {
+function fetchBudgets() {
   return dispatch => {
     const token = localStorage.getItem("token");
 
@@ -32,7 +32,7 @@ function fetchBudgets(userId) {
     })
       .then(r => r.json())
       .then(budgets => {
-        dispatch(fetchedUserBudgets(budgets.filter(b => b.user_id === userId)));
+        dispatch(fetchedUserBudgets(budgets));
       });
   };
 }

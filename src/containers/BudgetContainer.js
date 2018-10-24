@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Jumbotron } from "reactstrap";
 
 import BudgetMonthContainer from "./BudgetMonthContainer";
 import AccountForm from "../components/AccountForm";
@@ -39,8 +39,10 @@ class BudgetContainer extends Component {
               <AccountsSidebar accounts={accounts} />
             </Row>
             <Row>
-              <h5>Add Account</h5>
-              <AccountForm />
+              <Jumbotron>
+                <h5>Add Account</h5>
+                <AccountForm />
+              </Jumbotron>
             </Row>
           </Col>
           <Col xs="9">
