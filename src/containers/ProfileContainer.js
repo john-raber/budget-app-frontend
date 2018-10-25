@@ -26,13 +26,28 @@ class ProfileContainer extends Component {
     const { budgets } = this.props;
 
     return (
-      <Container fluid>
-        <Row>
-          <Col md={{ size: 8, offset: 2 }}>
-            <CardDeck>
-              {budgets.map(b => (
-                <BudgetCard key={b.id} budget={b} />
-              ))}
+      <Container fluid className="budget-card-list">
+        {budgets.length > 0 ? (
+          <Row>
+            <Col md={{ size: 8, offset: 2 }}>
+              <CardDeck>
+                {budgets.map(b => (
+                  <BudgetCard key={b.id} budget={b} />
+                ))}
+                <Card body className="text-center">
+                  <CardTitle>Add Budget</CardTitle>
+                  <NavLink to="/profile/add-budget">
+                    <Button outline color="success">
+                      Get Started
+                    </Button>
+                  </NavLink>
+                </Card>
+              </CardDeck>
+            </Col>
+          </Row>
+        ) : (
+          <Row>
+            <Col md={{ size: 3, offset: 4 }}>
               <Card body className="text-center">
                 <CardTitle>Add Budget</CardTitle>
                 <NavLink to="/profile/add-budget">
@@ -41,9 +56,9 @@ class ProfileContainer extends Component {
                   </Button>
                 </NavLink>
               </Card>
-            </CardDeck>
-          </Col>
-        </Row>
+            </Col>
+          </Row>
+        )}
       </Container>
     );
   }

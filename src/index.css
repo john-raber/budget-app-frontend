@@ -58,3 +58,7 @@ code {
   margin-left: 5em;
   color: rgb(255, 255, 255);
 }
+
+.budget-card-list {
+  margin-top: 3em;
+}
